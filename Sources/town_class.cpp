@@ -76,3 +76,42 @@ const std::vector<std::vector<Case*> >* Town::getpVectorCase() const
 {
 	return p_vector_case;
 }
+
+/* Methods */
+bool Town::init(unsigned int number_house, unsigned int number_hospital, unsigned int number_fire_station,
+		        unsigned int number_total_person, unsigned int number_fireman, unsigned int number_doctor,
+				float sick_percent)
+{
+	/* Check for parameters */
+	if(number_house + number_hospital + number_fire_station > this->height * this->width)
+	{
+		/* Too many buildings for the map */
+		return false;
+	}
+	if(number_total_person >
+	   number_house * Case::house_max_people +
+	   number_hospital * Case::hospital_max_people +
+	   number_fire_station * Case::fire_satation_max_people +
+	   (this->height * this->width - number_house - number_hospital - number_fire_station) * Case::field_max_people)
+	{
+		/* Too many people for the map */
+		return false;
+	}
+	if(0.0 > sick_percent || 100.0 < sick_percent)
+	{
+		/* Wrong percentage */
+		return false;
+	}
+
+	/* Place buildings randomly */
+	/* TODO */
+
+	/* Place people randomly, except for firemen and doctors */
+	/* TODO */
+
+	/* Infect a percentage of people randomly */
+	/* TODO */
+
+	/* Everything goes OK */
+	return true;
+}

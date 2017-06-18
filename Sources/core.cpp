@@ -35,6 +35,7 @@ int main(int argc, char** argv)
 
 	/* Tests */
 	cout << town_1 << endl;
+	cout << town_1.init(1, 1, 1, 10, 1, 1, 10) << endl;
 
 	/* End of main */
 	cout << "end of main." << endl;

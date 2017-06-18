@@ -32,6 +32,11 @@ class Town
 		unsigned int getWidth() const;
 		const std::vector<std::vector<Case*> >* getpVectorCase() const;
 
+		/* Methods */
+		bool init(unsigned int number_house, unsigned int number_hospital, unsigned int number_fire_station,
+				  unsigned int number_total_person, unsigned int number_fireman, unsigned int number_doctor,
+				  float sick_percent);
+
 	private:
 		/* Attributes */
 		unsigned int height;
