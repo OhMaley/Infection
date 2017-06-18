@@ -49,9 +49,9 @@ class Town
 			std::stringstream ss;
 			std::string str;
 			ss << "Town " << t.getHeight() << "x" << t.getWidth() << " :\n";
-			for(unsigned int i=0; i<t.getHeight(); i++)
+			for(unsigned int i=0; i<t.getHeight(); ++i)
 			{
-				for(unsigned int j=0; j<t.getWidth(); j++)
+				for(unsigned int j=0; j<t.getWidth(); ++j)
 				{
 					str += to_string(*((*(t.getpVectorCase()))[i][j])) + " | ";
 				}

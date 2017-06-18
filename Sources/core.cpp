@@ -29,13 +29,11 @@ int main(int argc, char** argv)
 
 	/* Create town for test */
 	Town town_1(3, 3);
-	(*(town_1.getpVectorCase()))[1][0]->setType(Case::hospital);
-	(*(town_1.getpVectorCase()))[1][0]->setNbPersonMax(Case::hospital_max_people);
-	(*(town_1.getpVectorCase()))[1][0]->setVectorPerson(list_person_1);
 
 	/* Tests */
 	cout << town_1 << endl;
 	cout << town_1.init(1, 1, 1, 10, 1, 1, 10) << endl;
+	cout << town_1 << endl;
 
 	/* End of main */
 	cout << "end of main." << endl;

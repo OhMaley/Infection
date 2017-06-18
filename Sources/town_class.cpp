@@ -6,6 +6,8 @@
  */
 
 #include "../Includes/town_class.h"
+#include <time.h>
+#include <cstdlib>
 
 /* Constructors */
 Town::Town()
@@ -104,7 +106,44 @@ bool Town::init(unsigned int number_house, unsigned int number_hospital, unsigne
 	}
 
 	/* Place buildings randomly */
-	/* TODO */
+	unsigned int rand_row, rand_column;
+	srand(time(NULL));
+	/* Houses */
+	for(unsigned int i=0; i<number_house; ++i)
+	{
+		do
+		{
+			rand_row = rand()%this->height;
+			rand_column = rand()%this->width;
+		} while((*(this->p_vector_case))[rand_row][rand_column]->getType() != Case::field);
+		(*(this->p_vector_case))[rand_row][rand_column]->setType(Case::house);
+		(*(this->p_vector_case))[rand_row][rand_column]->setNbPersonMax(Case::house_max_people);
+		(*(this->p_vector_case))[rand_row][rand_column]->setVectorPerson(std::vector<Person*>());
+	}
+	/* Hospitals */
+	for(unsigned int i=0; i<number_hospital; ++i)
+	{
+		do
+		{
+			rand_row = rand()%this->height;
+			rand_column = rand()%this->width;
+		} while((*(this->p_vector_case))[rand_row][rand_column]->getType() != Case::field);
+		(*(this->p_vector_case))[rand_row][rand_column]->setType(Case::hospital);
+		(*(this->p_vector_case))[rand_row][rand_column]->setNbPersonMax(Case::hospital_max_people);
+		(*(this->p_vector_case))[rand_row][rand_column]->setVectorPerson(std::vector<Person*>());
+	}
+	/* Fire stations */
+	for(unsigned int i=0; i<number_fire_station; ++i)
+	{
+		do
+		{
+			rand_row = rand()%this->height;
+			rand_column = rand()%this->width;
+		} while((*(this->p_vector_case))[rand_row][rand_column]->getType() != Case::field);
+		(*(this->p_vector_case))[rand_row][rand_column]->setType(Case::fire_station);
+		(*(this->p_vector_case))[rand_row][rand_column]->setNbPersonMax(Case::fire_satation_max_people);
+		(*(this->p_vector_case))[rand_row][rand_column]->setVectorPerson(std::vector<Person*>());
+	}
 
 	/* Place people randomly, except for firemen and doctors */
 	/* TODO */
