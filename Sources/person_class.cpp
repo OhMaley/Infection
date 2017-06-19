@@ -7,23 +7,48 @@
 
 #include "../Includes/person_class.h"
 
+
 /* Constructors */
 Person::Person()
 {
-	life = 100;
-	state = healthy;
+	this->life = 100;
+	this->state = healthy;
+	this->p_my_case = new Case();
 }
 
-Person::Person(float init_life)
+Person::Person(float life)
 {
-	life = init_life;
-	state = healthy;
+	this->life = life;
+	this->state = healthy;
+	this->p_my_case = new Case();
 }
 
-Person::Person(float init_life, Person::Person_state init_state)
+Person::Person(Case* p_my_case)
 {
-	life = init_life;
-	state = init_state;
+	this->life = 100;
+	this->state = healthy;
+	this->p_my_case = p_my_case;
+}
+
+Person::Person(float life, Person::Person_state state)
+{
+	this->life = life;
+	this->state = state;
+	this->p_my_case = new Case();
+}
+
+Person::Person(float life, Case* p_my_case)
+{
+	this->life = life;
+	this->state = healthy;
+	this->p_my_case = p_my_case;
+}
+
+Person::Person(float life, Person_state state, Case* p_my_case)
+{
+	this->life = life;
+	this->state = state;
+	this->p_my_case = p_my_case;
 }
 
 /* Setters */
@@ -37,6 +62,11 @@ void Person::setState(Person::Person_state state)
 	this->state = state;
 }
 
+void Person::setMyCase(Case*& myCase)
+{
+	p_my_case = myCase;
+}
+
 /* Getters */
 float Person::getLife() const
 {
@@ -46,4 +76,15 @@ float Person::getLife() const
 Person::Person_state Person::getState() const
 {
 	return state;
+}
+
+Case*& Person::getMyCase() const
+{
+	return p_my_case;
+}
+
+/* Method */
+bool Person::is_alive() const
+{
+	return this->state != Person::dead;
 }

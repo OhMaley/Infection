@@ -8,11 +8,10 @@
 #ifndef CASE_CLASS_H_
 #define CASE_CLASS_H_
 
-
 #include <vector>
 #include <sstream>
-#include "../Includes/person_class.h"
 
+class Person;
 class Case
 {
 	public:

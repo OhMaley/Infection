@@ -7,6 +7,7 @@
 
 #include "../Includes/case_class.h"
 
+
 /* Constructors */
 Case::Case()
 {

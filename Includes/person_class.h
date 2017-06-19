@@ -8,9 +8,12 @@
 #ifndef PERSON_CLASS_H_
 #define PERSON_CLASS_H_
 
-
 #include <iostream>
+#include <string>
+#include <sstream>
+#include "../Includes/case_class.h"
 
+class Case;
 class Person
 {
 	public:
@@ -20,15 +23,26 @@ class Person
 		/* Constructors */
 		Person();
 		Person(float life);
+		Person(Case* p_my_case);
 		Person(float life, Person_state state);
+		Person(float life, Case* p_my_case);
+		Person(float life, Person_state state, Case* p_my_case);
+
+		/* Public attribute */
+		Case* p_my_case;
 
 		/* Setters */
 		void setLife(float life);
 		void setState(Person_state state);
+		void setMyCase(Case*& myCase);
 
 		/* Getters */
 		float getLife() const;
 		Person_state getState() const;
+		Case*& getMyCase() const;
+
+		/* Method */
+		bool is_alive() const;
 
 	private:
 		/* Attributes */
@@ -57,6 +71,13 @@ class Person
 					break;
 			}
 			return os;
+		}
+
+		friend std::string to_string(Person_state const& p)
+		{
+			std::ostringstream ss;
+			ss << p;
+			return ss.str();
 		}
 };
 
