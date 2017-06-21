@@ -61,9 +61,9 @@ void Town::setWidth(unsigned int width)
 	this->width = width;
 }
 
-void Town::setVectorCase(std::vector<std::vector<Case*> >& vectorCase)
+void Town::setVectorCase(const std::vector<std::vector<Case*> >& vector_case)
 {
-	vector_case = vectorCase;
+	this->vector_case = vector_case;
 }
 
 /* Getters */
@@ -103,7 +103,6 @@ bool Town::init(unsigned int number_house, unsigned int number_hospital, unsigne
 	place_buildings_randomly(number_fire_station, Case::fire_station);
 
 	/* Place people randomly*/
-	std::vector<Person*> vector_person = std::vector<Person*>();
 	place_specialized_people_randomly(number_doctor, "doctor");
 	place_specialized_people_randomly(number_fireman, "fireman");
 	place_other_people_randomly(number_total_person-number_doctor-number_fireman);
@@ -206,13 +205,11 @@ void Town::place_specialized_people_randomly(unsigned int number_person, std::st
 		vector_person = vector_building[rand_range]->getVectorPerson();
 		if("doctor" == job)
 		{
-			/* TODO */
-			/* vector_person.push_back(new Doctor(vector_building[rand_range])); */
+			vector_person.push_back(new Doctor(vector_building[rand_range]));
 		}
 		else if("fireman" == job)
 		{
-			/* TODO */
-			/* vector_person.push_back(new Fireman(vector_building[rand_range])); */
+			vector_person.push_back(new Fireman(vector_building[rand_range]));
 		}
 		vector_building[rand_range]->setVectorPerson(vector_person);
 	}

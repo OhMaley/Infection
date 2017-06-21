@@ -62,9 +62,9 @@ void Person::setState(Person::Person_state state)
 	this->state = state;
 }
 
-void Person::setMyCase(Case*& myCase)
+void Person::setMyCase(Case*& p_my_case)
 {
-	p_my_case = myCase;
+	this->p_my_case = p_my_case;
 }
 
 /* Getters */
@@ -78,7 +78,7 @@ Person::Person_state Person::getState() const
 	return state;
 }
 
-Case*& Person::getMyCase() const
+const Case* Person::getMyCase() const
 {
 	return p_my_case;
 }

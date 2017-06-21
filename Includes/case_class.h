@@ -20,9 +20,7 @@ class Case
 		enum Case_max_people {field_max_people = 4, house_max_people = 8, hospital_max_people = 12, fire_satation_max_people = 6};
 
 		/* Constructors */
-		Case();
-		Case(Case_type type);
-		Case(Case_type type, unsigned int nb_person, std::vector<Person*> vector_person);
+		Case(Case_type type = field, unsigned int nb_person_max = field_max_people, std::vector<Person*> vector_person = std::vector<Person*>());
 
 		/* Setters */
 		void setNbPersonMax(unsigned int nb_person_max);

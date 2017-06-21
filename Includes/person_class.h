@@ -34,12 +34,12 @@ class Person
 		/* Setters */
 		void setLife(float life);
 		void setState(Person_state state);
-		void setMyCase(Case*& myCase);
+		void setMyCase(Case*& p_my_case);
 
 		/* Getters */
 		float getLife() const;
 		Person_state getState() const;
-		Case*& getMyCase() const;
+		const Case* getMyCase() const;
 
 		/* Method */
 		bool is_alive() const;

@@ -24,7 +24,7 @@ class Town
 		/* Setters */
 		void setHeight(unsigned int height);
 		void setWidth(unsigned int width);
-		void setVectorCase(std::vector<std::vector<Case*> >& vectorCase);
+		void setVectorCase(const std::vector<std::vector<Case*> >& vector_case);
 
 		/* Getters */
 		unsigned int getHeight() const;
