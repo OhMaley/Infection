@@ -15,15 +15,11 @@ class Doctor : public Person
 {
 	public:
 		/* Constructors */
-		Doctor();
-		Doctor(float life);
-		Doctor(Case* p_my_case);
-		Doctor(float life, Person::Person_state state);
-		Doctor(float life, Case* p_my_case);
+		Doctor(Case* my_case);
+		Doctor(float life, Case* my_case);
 		Doctor(float life, float vaccine);
-		Doctor(float life, Person::Person_state state, Case* p_my_case);
-		Doctor(float life, Person::Person_state state, float vaccine);
-		Doctor(float life, Person::Person_state state, float vaccine, Case* p_my_case);
+		Doctor(float life, Person::Person_state state, Case* my_case);
+		Doctor(float life = 100.0, Person::Person_state state = healthy, float vaccine = 4.0, Case* my_case = new Case());
 
 		/* Setter */
 		void setVaccine(float vaccine);
@@ -33,7 +29,7 @@ class Doctor : public Person
 
 		/* Method */
 		void heal_person(Person* p_person);
-		void heal_people_in_case();
+		void heal_people_in_my_case();
 
 	private:
 		/* Attribute */

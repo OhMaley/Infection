@@ -18,10 +18,12 @@ using namespace std;
 int main(int argc, char** argv)
 {
 	/* Create town for test */
-	Town town_1(2, 2);
+	/* Height x Width */
+	Town town_1(10, 10);
 
 	/* Tests */
-	town_1.init(1, 1, 1, 6, 4, 2, 20);
+	/* Number house, number hospital, number fire station, total number of person, number of fireman, number of doctor, percentage of infected people */
+	town_1.init(1, 1, 1, 27, 4, 2, 20);
 	cout << town_1 << endl;
 
 	/* End of main */

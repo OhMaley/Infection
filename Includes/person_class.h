@@ -12,42 +12,42 @@
 #include <string>
 #include <sstream>
 #include "../Includes/case_class.h"
+#include "../Includes/count_object_class.h"
+
 
 class Case;
-class Person
+class Person : public CountedObject<Person>
 {
 	public:
 		/* Enumerate */
 		enum Person_state {healthy, sick, dead};
 
 		/* Constructors */
-		Person();
-		Person(float life);
-		Person(Case* p_my_case);
-		Person(float life, Person_state state);
-		Person(float life, Case* p_my_case);
-		Person(float life, Person_state state, Case* p_my_case);
-
-		/* Public attribute */
-		Case* p_my_case;
+		Person(Case* my_case);
+		Person(float life, Case* my_case);
+		Person(float life = 100.0, Person_state state = healthy, Case* my_case = new Case());
 
 		/* Setters */
+		void setId(unsigned int ID);
 		void setLife(float life);
 		void setState(Person_state state);
-		void setMyCase(Case*& p_my_case);
+		void setMyCase(Case* my_case);
 
 		/* Getters */
+		unsigned int getId() const;
 		float getLife() const;
 		Person_state getState() const;
-		const Case* getMyCase() const;
+		Case* getMyCase() const;
 
 		/* Method */
 		bool is_alive() const;
 
 	private:
 		/* Attributes */
+		unsigned int ID;
 		float life;
 		Person_state state;
+		Case* my_case;
 
 		/* Operators */
 		inline friend std::ostream& operator<<(std::ostream& os, Person const& p)

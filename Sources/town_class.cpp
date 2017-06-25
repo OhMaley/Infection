@@ -148,6 +148,7 @@ bool Town::check_init_parameters(unsigned int number_house, unsigned int number_
 }
 void Town::place_buildings_randomly(unsigned int number_buildings, Case::Case_type case_type)
 {
+	/* Town is always initialized with full field, so now add house, fire station and hospital */
 	unsigned int rand_row, rand_column;
 	Case::Case_max_people max_people = Case::field_max_people;
 	if(Case::house == case_type)
@@ -164,11 +165,13 @@ void Town::place_buildings_randomly(unsigned int number_buildings, Case::Case_ty
 	}
 	for(unsigned int i=0; i<number_buildings; ++i)
 	{
+		/* Pick a random empty (field) localization on the map */
 		do
 		{
 			rand_row = rand()%this->height;
 			rand_column = rand()%this->width;
 		} while(Case::field != this->vector_case[rand_row][rand_column]->getType());
+		/* Transform it into a specialized building */
 		this->vector_case[rand_row][rand_column]->setType(case_type);
 		this->vector_case[rand_row][rand_column]->setNbPersonMax(max_people);
 		this->vector_case[rand_row][rand_column]->setVectorPerson(std::vector<Person*>());
@@ -189,6 +192,7 @@ void Town::place_specialized_people_randomly(unsigned int number_person, std::st
 	{
 		case_type = Case::fire_station;
 	}
+	/* Find where are the specialized buildings for the specifics people we need to place and store those */
 	for(unsigned int i=0; i<this->height; ++i)
 	{
 		for(unsigned int j=0; j<this->width; ++j)
@@ -199,10 +203,16 @@ void Town::place_specialized_people_randomly(unsigned int number_person, std::st
 			}
 		}
 	}
+	/* Place randomly the specialized people in their specialized buildings */
 	for(unsigned int i=0; i<number_person; ++i)
 	{
-		rand_range = rand()%vector_building.size();
+		/* Pick randomly an empty place */
+		do
+		{
+			rand_range = rand()%vector_building.size();
+		} while(vector_building[rand_range]->getVectorPerson().size() == vector_building[rand_range]->getNbPersonMax());
 		vector_person = vector_building[rand_range]->getVectorPerson();
+		/* Add a new specialized person in his specialized building */
 		if("doctor" == job)
 		{
 			vector_person.push_back(new Doctor(vector_building[rand_range]));
@@ -219,6 +229,7 @@ void Town::place_other_people_randomly(unsigned int number_people)
 {
 	unsigned int rand_row, rand_column;
 	std::vector<Person*> vector_person = std::vector<Person*>();
+	/* Place randomly every single standard citizen in an free place in the town */
 	for(unsigned int i=0; i<number_people; ++i)
 	{
 		do
@@ -236,6 +247,7 @@ void Town::infect_people_randomly(float percent)
 {
 	unsigned int total_person = 0, number_sick_person, rand_row, rand_column, rand_range;
 	bool are_they_all_sick;
+	/* Count the total number of citizens in the town */
 	for(unsigned int i=0; i<this->height; ++i)
 	{
 		for(unsigned int j=0; j<this->width; ++j)
@@ -243,26 +255,31 @@ void Town::infect_people_randomly(float percent)
 			total_person += this->vector_case[i][j]->getVectorPerson().size();
 		}
 	}
+	/* Compute a number of person who will be infected */
 	number_sick_person = (unsigned int) total_person * percent / 100;
 	for(unsigned int i=0; i<number_sick_person; ++i)
 	{
 		do
 		{
 			are_they_all_sick = true;
+			/* Pick a random non-empty case */
 			do
 			{
 				rand_row = rand()%this->height;
 				rand_column = rand()%this->width;
 			} while(0 == this->vector_case[rand_row][rand_column]->getVectorPerson().size());
+			/* Verify if people in this case are not all already sick, else pisk again */
 			for(unsigned int j=0; j<this->vector_case[rand_row][rand_column]->getVectorPerson().size(); ++j)
 			{
 				are_they_all_sick &= this->vector_case[rand_row][rand_column]->getVectorPerson()[j]->getState() == Person::sick;
 			}
 		} while(are_they_all_sick);
+		/* Now pick a random healthy person in the chosen case */
 		do
 		{
 			rand_range = rand()%this->vector_case[rand_row][rand_column]->getVectorPerson().size();
 		} while(Person::sick == this->vector_case[rand_row][rand_column]->getVectorPerson()[rand_range]->getState());
+		/* Let him become sick */
 		this->vector_case[rand_row][rand_column]->getVectorPerson()[rand_range]->setState(Person::sick);
 	}
 }
