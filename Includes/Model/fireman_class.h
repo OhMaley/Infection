@@ -8,7 +8,7 @@
 #ifndef FIREMAN_CLASS_H_
 #define FIREMAN_CLASS_H_
 
-#include "../Includes/person_class.h"
+#include "person_class.h"
 
 
 class Fireman : public Person

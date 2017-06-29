@@ -5,11 +5,12 @@
  *      Author: Tristan
  */
 
-#include "../Includes/town_class.h"
-#include "../Includes/doctor_class.h"
-#include "../Includes/fireman_class.h"
+#include "../../Includes/Model/town_class.h"
+
 #include <time.h>
 #include <cstdlib>
+#include "../../Includes/Model/doctor_class.h"
+#include "../../Includes/Model/fireman_class.h"
 
 
 /* Constructors */

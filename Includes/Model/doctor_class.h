@@ -8,7 +8,7 @@
 #ifndef DOCTOR_CLASS_H_
 #define DOCTOR_CLASS_H_
 
-#include "../Includes/person_class.h"
+#include "person_class.h"
 
 
 class Doctor : public Person

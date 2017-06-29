@@ -6,7 +6,7 @@
  */
 
 
-#include "../Includes/doctor_class.h"
+#include "../../Includes/Model/doctor_class.h"
 
 
 /* Constructors */

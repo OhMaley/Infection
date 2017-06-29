@@ -5,7 +5,7 @@
  *      Author: Tristan
  */
 
-#include "../Includes/case_class.h"
+#include "../../Includes/Model/case_class.h"
 
 
 /* Constructors */

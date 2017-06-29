@@ -5,12 +5,12 @@
  *      Author: Tristan
  */
 
-#include "../Includes/case_class.h"
-#include "../Includes/person_class.h"
-#include "../Includes/town_class.h"
-#include "../Includes/fireman_class.h"
-#include "../Includes/doctor_class.h"
 #include <iostream>
+#include "../Includes/Model/case_class.h"
+#include "../Includes/Model/doctor_class.h"
+#include "../Includes/Model/fireman_class.h"
+#include "../Includes/Model/person_class.h"
+#include "../Includes/Model/town_class.h"
 
 using namespace std;
 

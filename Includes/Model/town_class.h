@@ -10,7 +10,8 @@
 
 #include <vector>
 #include <string>
-#include "../Includes/case_class.h"
+
+#include "case_class.h"
 
 
 class Town

@@ -5,7 +5,7 @@
  *      Author: Tristan
  */
 
-#include "../Includes/person_class.h"
+#include "../../Includes/Model/person_class.h"
 
 
 /* Constructors */

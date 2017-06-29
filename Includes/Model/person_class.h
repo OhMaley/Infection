@@ -11,8 +11,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "../Includes/case_class.h"
-#include "../Includes/count_object_class.h"
+#include "case_class.h"
+#include "count_object_class.h"
 
 
 class Case;
