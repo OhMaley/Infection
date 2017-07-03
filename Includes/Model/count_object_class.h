@@ -8,7 +8,6 @@
 #ifndef COUNT_OBJECT_CLASS_H_
 #define COUNT_OBJECT_CLASS_H_
 
-/* TODO : use a vector of pointer to new instance */
 
 template <typename T>
 class CountedObject

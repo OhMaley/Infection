@@ -24,7 +24,7 @@ Town::Town()
 	{
 		for(unsigned int j=0; j<width; ++j)
 		{
-			(this->vector_case)[i][j] = new Case();
+			(this->vector_case)[i][j] = new Case(i, j);
 		}
 	}
 }
@@ -39,7 +39,7 @@ Town::Town(unsigned int height, unsigned int width)
 	{
 		for(unsigned int j=0; j<width; ++j)
 		{
-			(this->vector_case)[i][j] = new Case();
+			(this->vector_case)[i][j] = new Case(i, j);
 		}
 	}
 }

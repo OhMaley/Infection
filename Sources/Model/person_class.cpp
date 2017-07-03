@@ -9,7 +9,6 @@
 
 
 /* Constructors */
-
 Person::Person(Case* my_case)
 {
 	this->ID = this->Count_total_instance();

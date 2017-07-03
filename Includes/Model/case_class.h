@@ -20,20 +20,27 @@ class Case
 		enum Case_max_people {field_max_people = 4, house_max_people = 8, hospital_max_people = 12, fire_satation_max_people = 6};
 
 		/* Constructors */
-		Case(Case_type type = field, unsigned int nb_person_max = field_max_people, std::vector<Person*> vector_person = std::vector<Person*>());
+		Case(unsigned int row = 0, unsigned int column = 0, Case_type type = field, unsigned int nb_person_max = field_max_people,
+			 std::vector<Person*> vector_person = std::vector<Person*>());
 
 		/* Setters */
+		void setRow(unsigned int row);
+		void setColumn(unsigned int column);
 		void setNbPersonMax(unsigned int nb_person_max);
 		void setType(Case_type type);
 		void setVectorPerson(const std::vector<Person*>& vector_person);
 
 		/* Getters */
+		unsigned int getRow() const;
+		unsigned int getColumn() const;
 		unsigned int getNbPersonMax() const;
 		Case_type getType() const;
 		const std::vector<Person*>& getVectorPerson() const;
 
 	private:
 		/* Attributes */
+		unsigned int row;
+		unsigned int column;
 		Case_type type;
 		unsigned int nb_person_max;
 		std::vector<Person*> vector_person;

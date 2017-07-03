@@ -1,5 +1,5 @@
 /*
- * Doctor.cpp
+ * doctor_class.cpp
  *
  *  Created on: 19 juin 2017
  *      Author: trmary
