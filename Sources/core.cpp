@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	Town town_1(3, 3);
 
 	/* Number house, number hospital, number fire station, total number of person, number of fireman, number of doctor, percentage of infected people */
-	town_1.init(1, 1, 1, 27, 4, 2, 20);
+	town_1.init(1, 1, 1, 20, 2, 2, 20);
 
 	/* Test */
 	cout << town_1 << endl;
@@ -31,10 +31,10 @@ int main(int argc, char** argv)
 	/* Create simulation */
 	Simulation simu_1(&town_1);
 	simu_1.move_people_randomly();
+	simu_1.virus_propagation();
 
 	/* Test */
 	cout << town_1 << endl;
-
 	/* End of main */
 	cout << "end of main." << endl;
 	return 0;

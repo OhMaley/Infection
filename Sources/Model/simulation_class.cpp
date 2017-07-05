@@ -5,23 +5,19 @@
  *      Author: Tristan
  */
 
-#include "../../Includes/Model/simulation_class.h"
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
+#include <algorithm>
+#include "../../Includes/Model/simulation_class.h"
 #include "../../Includes/Model/fireman_class.h"
 
+
 /* Constructor */
-Simulation::Simulation(Town* town, float prob_infect_same_case, float prob_infect_near_case, float prob_mult_dead, float prob_mult_fireman,
-					   float prob_mult_hospital, float prob_mult_fire_station)
+Simulation::Simulation(Town* town, InfectionParameters infection_parameters)
 {
 	this->town = town;
-	this->prob_infect_same_case = prob_infect_same_case;
-	this->prob_infect_near_case = prob_infect_near_case;
-	this->prob_mult_dead = prob_mult_dead;
-	this->prob_mult_fireman = prob_mult_fireman;
-	this->prob_mult_hospital = prob_mult_hospital;
-	this->prob_mult_fire_station = prob_mult_fire_station;
+	this->infection_parameters = infection_parameters;
 }
 
 /* Setters */
@@ -32,32 +28,32 @@ void Simulation::setTown(Town*& town)
 
 void Simulation::setProbInfectSameCase(float probInfectSameCase)
 {
-	this->prob_infect_same_case = probInfectSameCase;
+	this->infection_parameters.prob_infect_same_case = probInfectSameCase;
 }
 
 void Simulation::setProbInfectNearCase(float probInfectNearCase)
 {
-	this->prob_infect_near_case = probInfectNearCase;
+	this->infection_parameters.prob_infect_near_case = probInfectNearCase;
 }
 
 void Simulation::setProbMultDead(float probMultDead)
 {
-	this->prob_mult_dead = probMultDead;
+	this->infection_parameters.prob_mult_dead = probMultDead;
 }
 
 void Simulation::setProbMultFireman(float probMultFireman)
 {
-	this->prob_mult_fireman = probMultFireman;
+	this->infection_parameters.prob_mult_fireman = probMultFireman;
 }
 
 void Simulation::setProbMultHospital(float probMultHospital)
 {
-	this->prob_mult_hospital = probMultHospital;
+	this->infection_parameters.prob_mult_hospital = probMultHospital;
 }
 
 void Simulation::setProbMultFireStation(float probMultFireStation)
 {
-	this->prob_mult_fire_station = probMultFireStation;
+	this->infection_parameters.prob_mult_fire_station = probMultFireStation;
 }
 
 /* Getters */
@@ -68,32 +64,32 @@ const Town* Simulation::getTown() const
 
 float Simulation::getProbInfectSameCase() const
 {
-	return prob_infect_same_case;
+	return infection_parameters.prob_infect_same_case;
 }
 
 float Simulation::getProbInfectNearCase() const
 {
-	return prob_infect_near_case;
+	return infection_parameters.prob_infect_near_case;
 }
 
 float Simulation::getProbMultDead() const
 {
-	return prob_mult_dead;
+	return infection_parameters.prob_mult_dead;
 }
 
 float Simulation::getProbMultFireman() const
 {
-	return prob_mult_fireman;
+	return infection_parameters.prob_mult_fireman;
 }
 
 float Simulation::getProbMultHospital() const
 {
-	return prob_mult_hospital;
+	return infection_parameters.prob_mult_hospital;
 }
 
 float Simulation::getProbMultFireStation() const
 {
-	return prob_mult_fire_station;
+	return infection_parameters.prob_mult_fire_station;
 }
 
 /* Methods */
@@ -140,8 +136,11 @@ void Simulation::move_person_randomly(Person* person, unsigned int position_in_c
 	/* Update my_case person attribute  */
 	person->setMyCase(vector_case_to_move[rand_index]);
 }
+
 void Simulation::move_people_randomly()
 {
+	std::vector<unsigned int> people_moved = std::vector<unsigned int>();
+	unsigned int id=0;
 	srand(time(NULL));
 	for(unsigned int i=0; i<this->getTown()->getHeight(); ++i)
 	{
@@ -149,7 +148,12 @@ void Simulation::move_people_randomly()
 		{
 			for(unsigned int k=0; k<this->getTown()->getVectorCase()[i][j]->getVectorPerson().size(); ++k)
 			{
-				move_person_randomly(this->getTown()->getVectorCase()[i][j]->getVectorPerson()[k], k);
+				id = this->getTown()->getVectorCase()[i][j]->getVectorPerson()[k]->getId();
+				if(std::find(people_moved.begin(), people_moved.end(), id) == people_moved.end())
+				{
+					move_person_randomly(this->getTown()->getVectorCase()[i][j]->getVectorPerson()[k], k);
+					people_moved.push_back(id);
+				}
 			}
 		}
 	}
@@ -173,22 +177,22 @@ void Simulation::infect_by_people_in_same_case(Person* person, unsigned int posi
 		prob_be_infected = 0;
 		if(neighbour->getState() != Person::healthy)
 		{
-			prob_be_infected = prob_infect_same_case;
+			prob_be_infected = this->getProbInfectSameCase();
 			if(neighbour->getState() == Person::dead)
 			{
-				prob_be_infected *= prob_mult_dead;
+				prob_be_infected *= this->getProbMultDead();
 			}
 			else if(dynamic_cast<Fireman*>(neighbour) != NULL)
 			{
-				prob_be_infected *= prob_mult_fireman;
+				prob_be_infected *= this->getProbMultFireman();
 			}
 			if(person->getMyCase()->getType() == Case::hospital)
 			{
-				prob_be_infected *= prob_mult_hospital;
+				prob_be_infected *= this->getProbMultHospital();
 			}
 			else if(person->getMyCase()->getType() == Case::fire_station)
 			{
-				prob_be_infected *= prob_mult_fire_station;
+				prob_be_infected *= this->getProbMultFireStation();
 			}
 		}
 		/* Let the probability decide the state of the person */
