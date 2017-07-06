@@ -13,26 +13,31 @@
 Fireman::Fireman(Case* my_case) : Person(my_case)
 {
 	this->firebomb = 4;
+	this->max_firebomb = 4;
 }
 
 Fireman::Fireman(float life, Case* my_case) : Person(life, my_case)
 {
 	this->firebomb = 4;
+	this->max_firebomb = 4;
 }
 
-Fireman::Fireman(float life, unsigned int firebomb) : Person(life)
+Fireman::Fireman(float life, unsigned int firebomb, unsigned int max_firebomb) : Person(life, new Case)
 {
 	this->firebomb = firebomb;
+	this->max_firebomb = max_firebomb;
 }
 
 Fireman::Fireman(float life, Person::Person_state state, Case* my_case) : Person(life, state, my_case)
 {
 	this->firebomb = 4;
+	this->max_firebomb = 4;
 }
 
-Fireman::Fireman(float life, Person::Person_state state, unsigned int firebomb, Case* my_case) : Person(life, state, my_case)
+Fireman::Fireman(float life, Person::Person_state state, unsigned int firebomb, unsigned int max_firebomb, Case* my_case) : Person(life, state, my_case)
 {
 	this->firebomb = firebomb;
+	this->max_firebomb = max_firebomb;
 }
 
 /* Setters */
@@ -41,10 +46,20 @@ void Fireman::setFirebomb(unsigned int firebomb)
 	this->firebomb = firebomb;
 }
 
+void Fireman::setMaxFirebomb(unsigned int max_firebomb)
+{
+	this->max_firebomb = max_firebomb;
+}
+
 /* Getters */
 unsigned int Fireman::getFirebomb() const
 {
 	return firebomb;
+}
+
+unsigned int Fireman::getMaxFirebomb() const
+{
+	return max_firebomb;
 }
 
 /* Method */

@@ -17,15 +17,17 @@ class Doctor : public Person
 		/* Constructors */
 		Doctor(Case* my_case);
 		Doctor(float life, Case* my_case);
-		Doctor(float life, float vaccine);
+		Doctor(float life, float vaccine, float max_vaccine);
 		Doctor(float life, Person::Person_state state, Case* my_case);
-		Doctor(float life = 100.0, Person::Person_state state = healthy, float vaccine = 4.0, Case* my_case = new Case());
+		Doctor(float life = 100.0, Person::Person_state state = healthy, float vaccine = 4.0, float max_vaccine = 4.0, Case* my_case = new Case());
 
 		/* Setter */
 		void setVaccine(float vaccine);
+		void setMaxVaccine(float max_vaccine);
 
 		/* Getter */
 		float getVaccine() const;
+		float getMaxVaccine() const;
 
 		/* Method */
 		void heal_person(Person* p_person);
@@ -34,6 +36,7 @@ class Doctor : public Person
 	private:
 		/* Attribute */
 		float vaccine;
+		float max_vaccine;
 };
 
 

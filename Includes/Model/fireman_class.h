@@ -15,17 +15,19 @@ class Fireman : public Person
 {
 	public:
 		/* Constructors */
-		Fireman(Case* my_case);
-		Fireman(float life, Case* my_case);
-		Fireman(float life, unsigned int firebomb);
-		Fireman(float life, Person::Person_state state, Case* my_case);
-		Fireman(float life = 100.0, Person::Person_state state = healthy, unsigned int firebomb = 4, Case* my_case = new Case());
+		Fireman(Case* my_case = new Case());
+		Fireman(float life = 100.0, Case* my_case = new Case());
+		Fireman(float life = 100.0, unsigned int firebomb = 4, unsigned int max_firebomb = 4);
+		Fireman(float life = 100.0, Person::Person_state state = healthy, Case* my_case = new Case());
+		Fireman(float life = 100.0, Person::Person_state state = healthy, unsigned int firebomb = 4, unsigned int max_firebomb = 4, Case* my_case = new Case());
 
 		/* Setter */
 		void setFirebomb(unsigned int firebomb);
+		void setMaxFirebomb(unsigned int max_firebomb);
 
 		/* Getter */
 		unsigned int getFirebomb() const;
+		unsigned int getMaxFirebomb() const;
 
 		/* Method */
 		void burn_corpse_in_my_case();
@@ -33,6 +35,7 @@ class Fireman : public Person
 	private:
 		/* Attribute */
 		unsigned int firebomb;
+		unsigned int max_firebomb;
 };
 
 

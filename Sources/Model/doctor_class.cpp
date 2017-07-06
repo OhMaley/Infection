@@ -13,26 +13,31 @@
 Doctor::Doctor(Case* my_case) : Person(my_case)
 {
 	this->vaccine = 4;
+	this->max_vaccine = 4;
 }
 
 Doctor::Doctor(float life, Case* my_case) : Person(life, my_case)
 {
 	this->vaccine = 4;
+	this->max_vaccine = 4;
 }
 
-Doctor::Doctor(float life, float vaccine) : Person(life)
+Doctor::Doctor(float life, float vaccine, float max_vaccine) : Person(life, new Case)
 {
 	this->vaccine = vaccine;
+	this->max_vaccine = max_vaccine;
 }
 
 Doctor::Doctor(float life, Person::Person_state state, Case* my_case) : Person(life, state, my_case)
 {
 	this->vaccine = 4;
+	this->max_vaccine = 4;
 }
 
-Doctor::Doctor(float life, Person::Person_state state, float vaccine, Case* my_case) : Person(life, state, my_case)
+Doctor::Doctor(float life, Person::Person_state state, float vaccine, float max_vaccine, Case* my_case) : Person(life, state, my_case)
 {
 	this->vaccine = vaccine;
+	this->max_vaccine = max_vaccine;
 }
 
 /* Setters */
@@ -41,10 +46,20 @@ void Doctor::setVaccine(float vaccine)
 	this->vaccine = vaccine;
 }
 
+void Doctor::setMaxVaccine(float max_vaccine)
+{
+	this->max_vaccine = max_vaccine;
+}
+
 /* Getters */
 float Doctor::getVaccine() const
 {
 	return vaccine;
+}
+
+float Doctor::getMaxVaccine() const
+{
+	return max_vaccine;
 }
 
 /* Method */

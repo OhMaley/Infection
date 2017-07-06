@@ -20,21 +20,24 @@ int main(int argc, char** argv)
 {
 	/* Create town for test */
 	/* Height x Width */
-	Town town_1(3, 3);
+	Town town_1(2, 2);
 
 	/* Number house, number hospital, number fire station, total number of person, number of fireman, number of doctor, percentage of infected people */
-	town_1.init(1, 1, 1, 20, 2, 2, 20);
-
-	/* Test */
-	cout << town_1 << endl;
+	town_1.init(0, 0, 1, 10, 4, 0, 10);
 
 	/* Create simulation */
 	Simulation simu_1(&town_1);
-	simu_1.move_people_randomly();
-	simu_1.virus_propagation();
 
 	/* Test */
-	cout << town_1 << endl;
+	cout << simu_1.getActualRound() << endl;
+	cout << *(simu_1.getVectorTownEachRound()[simu_1.getActualRound()]) << endl;
+	for(unsigned int i=0; i<10; ++i)
+	{
+		simu_1.next_round();
+	}
+	cout << simu_1.getActualRound() << endl;
+	cout << *(simu_1.getVectorTownEachRound()[simu_1.getActualRound()]) << endl;
+
 	/* End of main */
 	cout << "end of main." << endl;
 	return 0;
